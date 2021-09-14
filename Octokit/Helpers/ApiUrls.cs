@@ -1784,6 +1784,17 @@ namespace Octokit
         }
 
         /// <summary>
+        /// returns the <see cref="Uri"/> for listing organization projects for a team
+        /// </summary>
+        /// <param name="org">The organization that the team belongs to</param>
+        /// <param name="team">The team name</param>
+        /// <returns>Project</returns>
+        public static Uri TeamProjects(string org, string teamSlug
+        {
+            return "/orgs/{0}/teams/{1}/projects".FormatUri(id);
+        }
+
+        /// <summary>
         /// returns the <see cref="Uri"/> for teams
         /// use for update or deleting a team
         /// </summary>

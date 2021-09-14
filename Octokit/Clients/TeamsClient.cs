@@ -505,5 +505,24 @@ namespace Octokit
         {
             return ApiConnection.GetAll<OrganizationMembershipInvitation>(ApiUrls.TeamPendingInvitations(id), null, AcceptHeaders.OrganizationMembershipPreview, options);
         }
+
+        /// <summary>
+        /// Lists the organization projects for a team.
+        /// </summary>
+        /// <remarks>
+        /// See the <a href="https://docs.github.com/en/rest/reference/teams#list-team-projects">API Documentation</a>
+        /// for more information.
+        /// </remarks>
+        /// <param name="org">The organization that the team belongs to</param>
+        /// <param name="team">The team name</param>
+        /// <returns>Project</returns>
+        [ManualRoute("GET", "/orgs/{org}/teams/{team_slug}/projects")]
+        public Task<IReadOnlyList<Project>> GetAllTeamProjects(string org, string teamSlug, ApiOptions options)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(teamSlug, nameof(teamSlug));
+            Ensure.ArgumentNotNullOrEmptyString(org, nameof(org));
+
+            return ApiConnection.GetAll<Project>(ApiUrls.TeamProjects(id), null, AcceptHeaders.ProjectsApiPreview, options);
+        }
     }
 }
