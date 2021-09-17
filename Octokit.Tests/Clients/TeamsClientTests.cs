@@ -414,5 +414,24 @@ namespace Octokit.Tests.Clients
                     Args.ApiOptions);
             }
         }
+
+        public class TheGetAllTeamProjectsMethod
+        {
+            [Fact]
+            public async Task RequestsTheCorrectUrl()
+            {
+                var connection = Substitute.For<IApiConnection>();
+                var client = new TeamsClient(connection);
+
+                await client.GetAllTeamProjects("org", "team");
+
+                connection.Received().GetAll<Project>(
+                    Arg.Is<Uri>(u => u.ToString() == "/orgs/org/teams/team/projects"),
+                    null,
+                    "application/vnd.github.inertia-preview+json",
+                    Args.ApiOptions
+                );
+            }
+        }
     }
 }

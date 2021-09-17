@@ -231,5 +231,52 @@ namespace Octokit.Tests.Reactive
                     "application/vnd.github.korra-preview+json");
             }
         }
+
+        public class TheGetAllTeamProjectsMethod
+        {
+            [Fact]
+            public void EnsuresNonNullArguments()
+            {
+                var client = new ObservableTeamsClient(Substitute.For<IGitHubClient>());
+
+                Assert.Throws<ArgumentNullException>(() => client.GetAllTeamProjects("org", null));
+            }
+
+            [Fact]
+            public void RequestsTheCorrectUrl()
+            {
+                var github = Substitute.For<IGitHubClient>();
+                var client = new ObservableTeamsClient(github);
+
+                client.GetAllTeamProjects("org", "team");
+
+                github.Connection.Received().GetAndFlattenAllPages<Project>(
+                    Arg.Is<Uri>(u => u.ToString() == "/orgs/org/teams/team/projects"),
+                    Args.EmptyDictionary,
+                    "application/vnd.github.inertia-preview+json"
+                )
+            }
+
+            [Fact]
+            public void RequestsTheCorrectUrlWithApiOptions()
+            {
+                var github = Substitute.For<IGitHubClient>();
+                var client = new ObservableTeamsClient(github);
+                var options = new ApiOptions
+                {
+                    PageCount = 1,
+                    PageSize = 1,
+                    StartPage = 1
+                };
+
+                client.GetAllTeamProjects("org", "team", options);
+
+                github.Connection.Received().GetAndFlattenAllPages<Project>(
+                    Arg.Is<Uri>(u => u.ToString() == "orgs/org/teams/team/projects"),
+                    Arg.Is<Dictionary<string, string>>(d => d.Count == 2),
+                    "application/vnd.github.inertia-preview+json";
+                )
+            }
+        }
     }
 }
