@@ -259,7 +259,7 @@ namespace Octokit
         /// </remarks>
         /// <param name="org">The organization that the team belongs to</param>
         /// <param name="team">The team name</param>
-        /// <returns>Project</returns>
+        /// <returns>The team's Projects</returns>
         Task<IReadOnlyList<Project>> GetAllTeamProjects(string org, string teamSlug, ApiOptions options);
     }
 }

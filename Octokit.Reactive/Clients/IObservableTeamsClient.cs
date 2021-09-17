@@ -78,7 +78,7 @@ namespace Octokit.Reactive
         IObservable<Team> GetAllChildTeams(int id, ApiOptions options);
 
         /// <summary>
-        /// Returns all members of the given team. 
+        /// Returns all members of the given team.
         /// </summary>
         /// <remarks>
         /// https://developer.github.com/v3/orgs/teams/#list-team-members
@@ -87,7 +87,7 @@ namespace Octokit.Reactive
         IObservable<User> GetAllMembers(int id);
 
         /// <summary>
-        /// Returns all members of the given team. 
+        /// Returns all members of the given team.
         /// </summary>
         /// <remarks>
         /// https://developer.github.com/v3/orgs/teams/#list-team-members
@@ -161,7 +161,7 @@ namespace Octokit.Reactive
         IObservable<bool> RemoveMembership(int id, string login);
 
         /// <summary>
-        /// Gets whether the user with the given <paramref name="login"/> 
+        /// Gets whether the user with the given <paramref name="login"/>
         /// is a member of the team with the given <paramref name="id"/>.
         /// A <see cref="NotFoundException"/> is thrown if the user is not a member.
         /// </summary>
@@ -257,5 +257,30 @@ namespace Octokit.Reactive
         /// <param name="options">Options to change API behaviour.</param>
         /// <returns></returns>
         IObservable<OrganizationMembershipInvitation> GetAllPendingInvitations(int id, ApiOptions options);
+
+        /// <summary>
+        /// Lists the organization projects for a team.
+        /// </summary>
+        /// <remarks>
+        /// See the <a href="https://docs.github.com/en/rest/reference/teams#list-team-projects">API Documentation</a>
+        /// for more information.
+        /// </remarks>
+        /// <param name="org">The organization that the team belongs to</param>
+        /// <param name="team">The team name</param>
+        /// <returns>The team's Projects</returns>
+        IObservable<Project> GetAllTeamProjects(string org, string teamSlug);
+
+        /// <summary>
+        /// Lists the organization projects for a team.
+        /// </summary>
+        /// <remarks>
+        /// See the <a href="https://docs.github.com/en/rest/reference/teams#list-team-projects">API Documentation</a>
+        /// for more information.
+        /// </remarks>
+        /// <param name="org">The organization that the team belongs to</param>
+        /// <param name="team">The team name</param>
+        /// <param name="options">Options to change API behaviour</param>
+        /// <returns>The team's Projects</returns>
+        IObservable<Project> GetAllTeamProjects(string org, string teamSlug, ApiOptions options);
     }
 }
