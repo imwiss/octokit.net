@@ -1789,9 +1789,9 @@ namespace Octokit
         /// <param name="org">The organization that the team belongs to</param>
         /// <param name="team">The team name</param>
         /// <returns>Project</returns>
-        public static Uri TeamProjects(string org, string teamSlug
+        public static Uri TeamProjects(string org, string teamSlug)
         {
-            return "/orgs/{0}/teams/{1}/projects".FormatUri(id);
+            return "/orgs/{0}/teams/{1}/projects".FormatUri(org, teamSlug);
         }
 
         /// <summary>

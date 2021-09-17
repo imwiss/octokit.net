@@ -407,7 +407,7 @@ namespace Octokit.Reactive
             Ensure.ArgumentNotNullOrEmptyString(teamSlug, nameof(teamSlug));
             Ensure.ArgumentNotNullOrEmptyString(org, nameof(org));
 
-            return GetAllTeamProjects(org, teamSlug, ApiOptions.None)
+            return GetAllTeamProjects(org, teamSlug, ApiOptions.None);
         }
 
         /// <summary>
@@ -426,7 +426,7 @@ namespace Octokit.Reactive
             Ensure.ArgumentNotNullOrEmptyString(teamSlug, nameof(teamSlug));
             Ensure.ArgumentNotNullOrEmptyString(org, nameof(org));
 
-            return _connection.GetAndFlattenAllPages<Project>(ApiUrls.TeamProjects(id), null, AcceptHeaders.ProjectsApiPreview, options);
+            return _connection.GetAndFlattenAllPages<Project>(ApiUrls.TeamProjects(org, teamSlug), null, AcceptHeaders.ProjectsApiPreview, options);
         }
     }
 }

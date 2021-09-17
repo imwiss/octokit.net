@@ -517,12 +517,32 @@ namespace Octokit
         /// <param name="team">The team name</param>
         /// <returns>The team's Projects</returns>
         [ManualRoute("GET", "/orgs/{org}/teams/{team_slug}/projects")]
+        public Task<IReadOnlyList<Project>> GetAllTeamProjects(string org, string teamSlug)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(teamSlug, nameof(teamSlug));
+            Ensure.ArgumentNotNullOrEmptyString(org, nameof(org));
+
+            return GetAllTeamProjects(org, teamSlug, ApiOptions.None);
+        }
+
+        /// <summary>
+        /// Lists the organization projects for a team.
+        /// </summary>
+        /// <remarks>
+        /// See the <a href="https://docs.github.com/en/rest/reference/teams#list-team-projects">API Documentation</a>
+        /// for more information.
+        /// </remarks>
+        /// <param name="org">The organization that the team belongs to</param>
+        /// <param name="team">The team name</param>
+        /// <param name="options">Options to change API behaviour</param>
+        /// <returns>The team's Projects</returns>
+        [ManualRoute("GET", "/orgs/{org}/teams/{team_slug}/projects")]
         public Task<IReadOnlyList<Project>> GetAllTeamProjects(string org, string teamSlug, ApiOptions options)
         {
             Ensure.ArgumentNotNullOrEmptyString(teamSlug, nameof(teamSlug));
             Ensure.ArgumentNotNullOrEmptyString(org, nameof(org));
 
-            return ApiConnection.GetAll<Project>(ApiUrls.TeamProjects(id), null, AcceptHeaders.ProjectsApiPreview, options);
+            return ApiConnection.GetAll<Project>(ApiUrls.TeamProjects(org, teamSlug), null, AcceptHeaders.ProjectsApiPreview, options);
         }
     }
 }

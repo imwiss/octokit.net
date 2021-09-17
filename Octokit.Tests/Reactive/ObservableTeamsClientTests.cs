@@ -254,7 +254,7 @@ namespace Octokit.Tests.Reactive
                     Arg.Is<Uri>(u => u.ToString() == "/orgs/org/teams/team/projects"),
                     Args.EmptyDictionary,
                     "application/vnd.github.inertia-preview+json"
-                )
+                );
             }
 
             [Fact]
@@ -274,8 +274,8 @@ namespace Octokit.Tests.Reactive
                 github.Connection.Received().GetAndFlattenAllPages<Project>(
                     Arg.Is<Uri>(u => u.ToString() == "orgs/org/teams/team/projects"),
                     Arg.Is<Dictionary<string, string>>(d => d.Count == 2),
-                    "application/vnd.github.inertia-preview+json";
-                )
+                    "application/vnd.github.inertia-preview+json"
+                );
             }
         }
     }
